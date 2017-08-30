@@ -1,6 +1,6 @@
 body{
     background: gray;
-    width: 500px;
+    width: 560px;
     margin:50px auto;
     padding: 0;
 }
@@ -12,6 +12,7 @@ h1{
 #game-board{
     width: 490px;
     height: 490px;
+    float:left;
 }
 #game-board div{
     background: yellowgreen; 
@@ -23,7 +24,7 @@ h1{
 }	
 
 #header-game-board{
-    width: 490px;
+    width: 560px;
 }
 
 .header-game-board{
@@ -39,9 +40,20 @@ h1{
     float: left;
 }
 
+#aside-game-board{
+    width: 70px;
+    float: left;
+}
+
 .aside-game-board{
     font-size: 25px;
     text-align: center;
     line-height: 70px;
     color: white;
+    background: yellowgreen; 
+	border: 1px solid yellow;
+	width:70px;
+    height:70px;
+    box-sizing: border-box;
+
 }
