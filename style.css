@@ -1,0 +1,36 @@
+body{
+    background: gray;
+    width: 500px;
+    margin:50px auto;
+    padding: 0;
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+    color: white;
+}
+#gameboard{
+    width: 490px;
+    height: 490px;
+}
+#gameboard div{
+    background: yellowgreen; 
+	border: 1px solid yellow;
+	width:70px;
+    height:70px;
+    box-sizing: border-box;
+    float: left;
+}	
+.header-gameboard{
+    font-size: 25px;
+    text-align: center;
+    line-height: 70px;
+    color: white;
+}
+
+.aside-gameboard{
+    font-size: 25px;
+    text-align: center;
+    line-height: 70px;
+    color: white;
+}
