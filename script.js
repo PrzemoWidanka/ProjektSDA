@@ -1,24 +1,25 @@
-//variable columns and rows
+//variables columns and rows
 
 var colsCount = 7;
 var rowsCount = 7;
 
 $(document).ready(function () {
     //access to html
+    var container = $("#container");
     var gameBoard = $("#game-board");
     var headerGameBoard = $("#header-game-board");
     var asideGameBoard = $("#aside-game-board");
 
-    //variable with letters and numbers
+    //variables with letters and numbers to create header and aside
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
     var numbers = [1, 2, 3, 4, 5, 6, 7];
 
-    //empty variable to assigment new html
+    //empty variables to assigment new content html
     var content = "";
     var writeLetters = "";
     var writeNumbers = "";
 
-    //create letters
+    //create letters 
     for (var i = 0; i <= rowsCount; i++) {
         writeLetters = writeLetters + '<div class="header-game-board ">' + letters[i] + '</div>';
     }
@@ -28,7 +29,7 @@ $(document).ready(function () {
         writeNumbers = writeNumbers + '<div class="aside-game-board ">' + numbers[i] + '</div>';
     }
 
-    //create gameboard
+    //create game board
     for (var i = 0; i < colsCount; i++) {
         for (var j = 0; j < rowsCount; j++) {
             var fieldGameBoard = [
@@ -36,8 +37,7 @@ $(document).ready(function () {
                 [j]
             ];
             var id = "field_" + i + "_" + j;
-            content = content + '<div id="' + id + '">' + '</div>';
-            console.log(fieldGameBoard);
+            content = content + '<div id="' + id + '" class="game-board-div">' + '</div>';
         }
     }
 
@@ -45,33 +45,48 @@ $(document).ready(function () {
     var hitCount = 0;
 
     var gameBoardWithShips = [
-        [0,0,0,1,0,0,0],
-        [0,0,1,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,1,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,1,0],
-        [1,0,0,0,0,0,0]
+        [0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+        [1, 0, 0, 0, 0, 0, 0]
     ]
 
-    gameBoard.click(function(e){
+    //function that checks fields(empty or ship)
+    gameBoard.click(function (e) {
 
-        var coOrdinates = event.target.id.split('_');
-        // console.log(coOrdinates[1], coOrdinates[2]);
-        var shootResult = gameBoardWithShips[coOrdinates[1]][coOrdinates[2]];
-        if(shootResult === 1){
-            shootResult = 2;
-            hitCount++;  
-            e.target.style.background = "red";   
-            if(hitCount === 5){
-                setTimeout(function(){alert("WIN"); }, 10);
-            }
+        var coOrdinates = e.target.id.split('_');
+        var shotResult = gameBoardWithShips[coOrdinates[1]][coOrdinates[2]];
+        var target = $(e.target);
+        if (shotResult === 1) {
+            target.removeClass("game-board-div");
+            target.addClass("hit");
+            target.click(false);
+            hitCount++;
+        } else {
+            target.removeClass("game-board-div");
+            target.addClass("miss");
+            target.click(false);
         }
-        // console.log(gameBoardWithShips[coOrdinates[1]][coOrdinates[2]]);
-   
+        if (hitCount === 5) {
+            hitCount = 0;
+            gameBoard.attr("style", "cursor: default");
+            gameBoard.off('click');
+            setTimeout(function () {
+                swal({
+                    title: "Gratki !!!",
+                    text: "Przeszedłeś GIERE !!",
+                    imageUrl: "sweetalert-master/example/images/thumbs-up.jpg"
+                });
+            }, 10);
+            // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
+        }
+
     });
 
-        
+
     //display html
     headerGameBoard.html(writeLetters);
     asideGameBoard.html(writeNumbers);
