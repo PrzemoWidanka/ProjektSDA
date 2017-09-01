@@ -52,6 +52,7 @@ h1 {
 #aside-game-board {
     width: 70px;
     float: left;
+    clear: both;
 }
 
 .aside-game-board {
