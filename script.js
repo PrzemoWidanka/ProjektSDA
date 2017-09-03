@@ -109,15 +109,17 @@ $(document).ready(function () {
                     closeOnCancel: false
                 });
             }, 10);
+            clearInterval(intervalId);
             // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
         }
 
     });
 
+    //function that starts the game and starts the stopwatch
     buttonPlay.click(function () {
         $(".first-board").remove();
         var time = 0;
-        setInterval(function () {
+        intervalId = setInterval(function () { //zmienna globalna jak inaczej?
             time++;
             if (time <= 30) {
                 $(".time").text(time);
@@ -139,6 +141,7 @@ $(document).ready(function () {
         }, 1000);
     });
 
+    //function that reload the website
     buttonRestart.click(function(){
         location.reload()
     });
