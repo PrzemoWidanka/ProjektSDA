@@ -9,6 +9,10 @@ $(document).ready(function () {
     var gameBoard = $("#game-board");
     var headerGameBoard = $("#header-game-board");
     var asideGameBoard = $("#aside-game-board");
+    var buttonPlay = $(".play-button");
+    var buttonRestart = $(".restart-button");
+    var firstBoard = $(".first-board");
+    var stopwatch = $(".stopwatch");
 
     //variables with letters and numbers to create header and aside
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -101,7 +105,8 @@ $(document).ready(function () {
                 swal({
                     title: "Gratki !!!",
                     text: "Przeszedłeś GIERE !!",
-                    imageUrl: "sweetalert-master/example/images/thumbs-up.jpg"
+                    imageUrl: "sweetalert-master/example/images/thumbs-up.jpg",
+                    closeOnCancel: false
                 });
             }, 10);
             // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
@@ -109,6 +114,34 @@ $(document).ready(function () {
 
     });
 
+    buttonPlay.click(function () {
+        $(".first-board").remove();
+        var time = 0;
+        setInterval(function () {
+            time++;
+            if (time <= 30) {
+                $(".time").text(time);
+                buttonPlay.off('click');
+                buttonPlay.css('cursor','default');
+            }
+            if (time === 30) {
+                setTimeout(function () {
+                    sweetAlert({
+                        title: "Oops...",
+                        text: "TimeOUT!",
+                        type: "error",
+                        closeOnCancel: false
+                    });
+                }, 10);
+                gameBoard.off('click')
+                clearInterval(time);
+            }
+        }, 1000);
+    });
+
+    buttonRestart.click(function(){
+        location.reload()
+    });
 
     //display html
     headerGameBoard.html(writeLetters);
