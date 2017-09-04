@@ -43,22 +43,44 @@ $(document).ready(function () {
 
     //create ships
     var hitCount = 0;
+    var numberShips = 5;
 
     var gameBoardWithShips = [
-        [0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 0, 0, 0]
-    ]
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    function insertShip() {
+
+        var row = Math.floor(Math.random() * rowsCount);
+        var col = Math.floor(Math.random() * colsCount);
+        if (gameBoardWithShips[row][col] !== 1) {
+
+            gameBoardWithShips[row][col] = 1;
+        } else {
+            insertShip();
+        }
+    }
+
+    for (var i = 0; i < numberShips; i++) {
+        insertShip();
+    }
 
     //function that checks fields(empty or ship)
     gameBoard.click(function (e) {
 
-        var coOrdinates = e.target.id.split('_');
-        var shotResult = gameBoardWithShips[coOrdinates[1]][coOrdinates[2]];
+        var coordinates = e.target.id.split('_');
+
+        if (coordinates.length < 3) {
+            return;
+        }
+        var shotResult = gameBoardWithShips[coordinates[1]][coordinates[2]];
+
         var target = $(e.target);
         if (shotResult === 1) {
             target.removeClass("game-board-div");
