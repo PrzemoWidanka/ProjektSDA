@@ -9,6 +9,10 @@ $(document).ready(function () {
     var gameBoard = $("#game-board");
     var headerGameBoard = $("#header-game-board");
     var asideGameBoard = $("#aside-game-board");
+    var buttonPlay = $(".play-button");
+    var buttonRestart = $(".restart-button");
+    var firstBoard = $(".first-board");
+    var stopwatch = $(".stopwatch");
 
     //variables with letters and numbers to create header and aside
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -44,6 +48,7 @@ $(document).ready(function () {
     //create ships
     var hitCount = 0;
     var numberShips = 5;
+    var intervalId;
 
     var gameBoardWithShips = [
         [0, 0, 0, 0, 0, 0, 0],
@@ -100,14 +105,46 @@ $(document).ready(function () {
                 swal({
                     title: "Gratki !!!",
                     text: "Przeszedłeś GIERE !!",
-                    imageUrl: "sweetalert-master/example/images/thumbs-up.jpg"
+                    imageUrl: "sweetalert-master/example/images/thumbs-up.jpg",
+                    closeOnCancel: false
                 });
             }, 10);
+            clearInterval(intervalId);
             // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
         }
 
     });
 
+    //function that starts the game and starts the stopwatch
+    buttonPlay.click(function () {
+        $(".first-board").remove();
+        var time = 0;
+        intervalId = setInterval(function () { //zmienna globalna jak inaczej?
+            time++;
+            if (time <= 30) {
+                $(".time").text(time);
+                buttonPlay.off('click');
+                buttonPlay.css('cursor','default');
+            }
+            if (time === 30) {
+                setTimeout(function () {
+                    sweetAlert({
+                        title: "Oops...",
+                        text: "TimeOUT!",
+                        type: "error",
+                        closeOnCancel: false
+                    });
+                }, 10);
+                gameBoard.off('click')
+                clearInterval(intervalId);
+            }
+        }, 1000);
+    });
+
+    //function that reload the website
+    buttonRestart.click(function(){
+        location.reload()
+    });
 
     //display html
     headerGameBoard.html(writeLetters);
