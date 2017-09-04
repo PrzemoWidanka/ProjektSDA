@@ -43,7 +43,6 @@ $(document).ready(function () {
 
     //create ships
     var hitCount = 0;
-    var col, row;
     var numberShips = 5;
 
     var gameBoardWithShips = [
@@ -58,13 +57,13 @@ $(document).ready(function () {
 
     function insertShip() {
 
-        row = Math.floor(Math.random() * rowsCount);
-        col = Math.floor(Math.random() * colsCount);
+        var row = Math.floor(Math.random() * rowsCount);
+        var col = Math.floor(Math.random() * colsCount);
         if (gameBoardWithShips[row][col] !== 1) {
 
             gameBoardWithShips[row][col] = 1;
         } else {
-            insertShip()
+            insertShip();
         }
     }
 
@@ -75,12 +74,12 @@ $(document).ready(function () {
     //function that checks fields(empty or ship)
     gameBoard.click(function (e) {
 
-        var coOrdinates = e.target.id.split('_');
+        var coordinates = e.target.id.split('_');
 
-        if (coOrdinates.length < 3) {
+        if (coordinates.length < 3) {
             return;
         }
-        var shotResult = gameBoardWithShips[coOrdinates[1]][coOrdinates[2]];
+        var shotResult = gameBoardWithShips[coordinates[1]][coordinates[2]];
 
         var target = $(e.target);
         if (shotResult === 1) {
