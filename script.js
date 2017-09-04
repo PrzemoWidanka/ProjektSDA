@@ -48,6 +48,7 @@ $(document).ready(function () {
     //create ships
     var hitCount = 0;
     var numberShips = 5;
+    var intervalId;
 
     var gameBoardWithShips = [
         [0, 0, 0, 0, 0, 0, 0],
@@ -135,7 +136,7 @@ $(document).ready(function () {
                     });
                 }, 10);
                 gameBoard.off('click')
-                clearInterval(time);
+                clearInterval(intervalId);
             }
         }, 1000);
     });
