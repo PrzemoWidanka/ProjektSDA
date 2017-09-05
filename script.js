@@ -18,8 +18,6 @@ $(document).ready(function () {
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
     var numbers = [1, 2, 3, 4, 5, 6, 7];
 
-    //empty variables to assigment new content html
-
     function createLetters() {
 
         var writeLetters = "";
@@ -61,9 +59,9 @@ $(document).ready(function () {
         restartTime();
         restartHit();
         startGameTimer();
-        gameBoard.off('click');
-        gameBoard.click(asd);
-        isPlaying = true;
+        gameBoard.off('click'); // ???
+        gameBoard.click(clickGameBoard); // ???
+        // isPlaying = true;
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
@@ -75,7 +73,7 @@ $(document).ready(function () {
     var intervalId;
     var time;
     var gameBoardWithShips;
-    var isPlaying = false;
+    // var isPlaying = false;
 
     function restartHit() {
         hitCount = 0;
@@ -83,7 +81,7 @@ $(document).ready(function () {
 
     function restartTime() {
         time = 30;
-        $(".time").text(time);
+        $(".time").text(time); //dlaczego ??
     }
 
     function clearGameBoard() {
@@ -117,10 +115,10 @@ $(document).ready(function () {
     }
 
     function startGameTimer() {
-        clearInterval(intervalId);
+        clearInterval(intervalId); // czemu czyścimy id?
         intervalId = setInterval(function () {
             time--;
-            console.log(time);
+            // console.log(time);
             if (time <= 30) {
                 $(".time").text(time);
                 buttonPlay.off('click');
@@ -135,35 +133,31 @@ $(document).ready(function () {
                         closeOnCancel: false
                     });
                 }, 10);
-                gameBoard.off('click')
+                gameBoard.off('click');
+                gameBoard.attr("style", "cursor: default");
                 clearInterval(intervalId);
             }
         }, 1000);
     }
 
-    //function that checks fields(empty or ship)
-
-    
-
-
     //function that starts the game and starts the stopwatch
     buttonPlay.click(function () {
         $(".first-board").remove();
-
         startGame();
+        buttonRestart.removeAttr('disabled');
     });
 
     //function that reload the website
     buttonRestart.click(function () {
         // location.reload();
         startGame();
+        gameBoard.attr("style", "cursor: pointer");
     });
 
-    //display html
-    // startGame();
+    buttonRestart.attr('disabled', 'disabled');
 
-    function asd(e) {
-        
+    function clickGameBoard(e) {
+
         var coordinates = e.target.id.split('_');
 
         if (coordinates.length < 3) {
@@ -197,6 +191,5 @@ $(document).ready(function () {
             clearInterval(intervalId);
             // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
         }
-
     }
 });
