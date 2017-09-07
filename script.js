@@ -1,5 +1,4 @@
 //variables columns and rows
-
 var colsCount = 7;
 var rowsCount = 7;
 
@@ -46,9 +45,11 @@ $(document).ready(function () {
                     [i],
                     [j]
                 ];
+
                 var shotResult = gameBoardWithShips[i][j];
+                var style = shotResult ? ' style="opacity:0.5" ' : '';
                 var id = "field_" + i + "_" + j;
-                content = content + '<div id="' + id + '" class="game-board-div">' + '</div>';
+                content = content + '<div id="' + id + '" ' + style + 'class="game-board-div">' + '</div>';
             }
         }
         return content;
@@ -61,11 +62,11 @@ $(document).ready(function () {
         restartHit();
         startGameTimer();
         restartMissCount();
+        init();
         buttonPlay.off('click');
         buttonPlay.css('cursor', 'default');
         gameBoard.unbind('click'); // ??? - zdejmuje nasluchiwanie klika (jesli ktos kliknie kilka razy to wykona sie to tylko raz)
-        gameBoard.click(clickGameBoard); // 
-        // isPlaying = true;
+        gameBoard.click(clickGameBoard);
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
@@ -79,7 +80,7 @@ $(document).ready(function () {
     var gameBoardWithShips;
     var missCount;
     var bestTime = 30;
-    // var isPlaying = false;
+    var timeGame = 0;
 
     function restartMissCount() {
         $(".miss-ships").text("0");
@@ -108,12 +109,28 @@ $(document).ready(function () {
         ];
     }
 
+    function isFieldEmpty(row, col) {
+        if (row < 0 || col < 0 || row > rowsCount -1  || col > colsCount - 1) {
+            console.log(row, col);
+            return true;
+        }
+        return gameBoardWithShips[row][col] !== 1;
+    }
+
     function insertShip() {
 
         var row = Math.floor(Math.random() * rowsCount);
         var col = Math.floor(Math.random() * colsCount);
-        if (gameBoardWithShips[row][col] !== 1) {
-
+        if (isFieldEmpty(row, col) &&
+            isFieldEmpty(row + 1, col + 1) &&
+            isFieldEmpty(row - 1, col - 1) &&
+            isFieldEmpty(row + 1, col - 1) &&
+            isFieldEmpty(row - 1, col + 1) &&
+            isFieldEmpty(row + 1, col) &&
+            isFieldEmpty(row - 1, col) &&
+            isFieldEmpty(row, col + 1) &&
+            isFieldEmpty(row, col - 1)) 
+        {
             gameBoardWithShips[row][col] = 1;
         } else {
             insertShip();
@@ -130,7 +147,6 @@ $(document).ready(function () {
         clearInterval(intervalId); // czyścimy ponieważ jeśli ktoś kliknie kilka razy by czas nie leciał szybciej
         intervalId = setInterval(function () {
             time++;
-            // console.log(time);
             if (time >= 0) {
                 $(".time").text(30 - time);
             }
@@ -159,7 +175,6 @@ $(document).ready(function () {
 
     //function that reload the website
     buttonRestart.click(function () {
-        // location.reload();
         startGame();
         gameBoard.attr("style", "cursor: pointer");
     });
@@ -189,6 +204,19 @@ $(document).ready(function () {
             $(".miss-ships").text(missCount + 1);
             missCount++;
         }
+        if (missCount === 44) {
+            gameBoard.attr("style", "cursor: default");
+            gameBoard.off('click');
+            setTimeout(function () {
+                sweetAlert({
+                    title: "Oops...",
+                    text: "Przegrałeś",
+                    type: "error",
+                    closeOnCancel: false
+                });
+            }, 10);
+            clearInterval(intervalId);
+        }
         if (hitCount === 5) {
             hitCount = 0;
             gameBoard.attr("style", "cursor: default");
@@ -202,14 +230,21 @@ $(document).ready(function () {
                 });
             }, 10);
             clearInterval(intervalId);
-            if (time < bestTime) {
+            if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
+                localStorage.setItem("bestTimeStorage", bestTime);
+                $(".result").text((bestTime) + " sek.");
+                $(".result2").text((bestTime) + " sek.");
+            } else {
+                timeGame = time;
+                $(".result2").text((timeGame) + " sek.");
             }
-            $(".result").text((bestTime) + " sekund");
+        }
+    }
 
-
-
-            // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
+    function init() {
+        if (localStorage.getItem("bestTimeStorage", bestTime)) {
+            bestTime = $(".result").html(localStorage.getItem("bestTimeStorage") + " sek.");
         }
     }
 });
