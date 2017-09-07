@@ -76,7 +76,7 @@ $(document).ready(function () {
     var hitCount;
     var numberShips = 5;
     var intervalId;
-    var time;
+    var time = 0;
     var gameBoardWithShips;
     var missCount;
     var bestTime = 30;
@@ -92,9 +92,15 @@ $(document).ready(function () {
         hitCount = 0;
     }
 
+    function updateTimer() {
+        if (time >= 0) {
+            $(".time").text(30 - time);
+        }
+    }
+
     function restartTime() {
         time = 0;
-        $(".time").text(30 - time); //pobieramy nowy czas
+        updateTimer(0);
     }
 
     function clearGameBoard() {
@@ -110,8 +116,7 @@ $(document).ready(function () {
     }
 
     function isFieldEmpty(row, col) {
-        if (row < 0 || col < 0 || row > rowsCount -1  || col > colsCount - 1) {
-            console.log(row, col);
+        if (row < 0 || col < 0 || row > rowsCount - 1 || col > colsCount - 1) {
             return true;
         }
         return gameBoardWithShips[row][col] !== 1;
@@ -129,8 +134,7 @@ $(document).ready(function () {
             isFieldEmpty(row + 1, col) &&
             isFieldEmpty(row - 1, col) &&
             isFieldEmpty(row, col + 1) &&
-            isFieldEmpty(row, col - 1)) 
-        {
+            isFieldEmpty(row, col - 1)) {
             gameBoardWithShips[row][col] = 1;
         } else {
             insertShip();
@@ -146,10 +150,8 @@ $(document).ready(function () {
     function startGameTimer() {
         clearInterval(intervalId); // czyścimy ponieważ jeśli ktoś kliknie kilka razy by czas nie leciał szybciej
         intervalId = setInterval(function () {
-            time++;
-            if (time >= 0) {
-                $(".time").text(30 - time);
-            }
+            time++
+            updateTimer()
             if (time === 30) {
                 setTimeout(function () {
                     sweetAlert({
