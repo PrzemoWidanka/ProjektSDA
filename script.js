@@ -46,6 +46,7 @@ $(document).ready(function () {
                     [i],
                     [j]
                 ];
+                var shotResult = gameBoardWithShips[i][j];
                 var id = "field_" + i + "_" + j;
                 content = content + '<div id="' + id + '" class="game-board-div">' + '</div>';
             }
@@ -59,8 +60,11 @@ $(document).ready(function () {
         restartTime();
         restartHit();
         startGameTimer();
-        gameBoard.off('click'); // ???
-        gameBoard.click(clickGameBoard); // ???
+        restartMissCount();
+        buttonPlay.off('click');
+        buttonPlay.css('cursor', 'default');
+        gameBoard.unbind('click'); // ??? - zdejmuje nasluchiwanie klika (jesli ktos kliknie kilka razy to wykona sie to tylko raz)
+        gameBoard.click(clickGameBoard); // 
         // isPlaying = true;
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
@@ -73,15 +77,23 @@ $(document).ready(function () {
     var intervalId;
     var time;
     var gameBoardWithShips;
+    var missCount;
+    var bestTime = 30;
     // var isPlaying = false;
 
+    function restartMissCount() {
+        $(".miss-ships").text("0");
+        missCount = 0;
+    }
+
     function restartHit() {
+        $(".hit-ships").text("0");
         hitCount = 0;
     }
 
     function restartTime() {
-        time = 30;
-        $(".time").text(time); //dlaczego ??
+        time = 0;
+        $(".time").text(30 - time); //pobieramy nowy czas
     }
 
     function clearGameBoard() {
@@ -115,16 +127,14 @@ $(document).ready(function () {
     }
 
     function startGameTimer() {
-        clearInterval(intervalId); // czemu czyścimy id?
+        clearInterval(intervalId); // czyścimy ponieważ jeśli ktoś kliknie kilka razy by czas nie leciał szybciej
         intervalId = setInterval(function () {
-            time--;
+            time++;
             // console.log(time);
-            if (time <= 30) {
-                $(".time").text(time);
-                buttonPlay.off('click');
-                buttonPlay.css('cursor', 'default');
+            if (time >= 0) {
+                $(".time").text(30 - time);
             }
-            if (time === 0) {
+            if (time === 30) {
                 setTimeout(function () {
                     sweetAlert({
                         title: "Oops...",
@@ -170,11 +180,14 @@ $(document).ready(function () {
             target.removeClass("game-board-div");
             target.addClass("hit");
             target.click(false);
+            $(".hit-ships").text(hitCount + 1);
             hitCount++;
         } else {
             target.removeClass("game-board-div");
             target.addClass("miss");
             target.click(false);
+            $(".miss-ships").text(missCount + 1);
+            missCount++;
         }
         if (hitCount === 5) {
             hitCount = 0;
@@ -189,6 +202,13 @@ $(document).ready(function () {
                 });
             }, 10);
             clearInterval(intervalId);
+            if (time < bestTime) {
+                bestTime = time;
+            }
+            $(".result").text((bestTime) + " sekund");
+
+
+
             // container.html("Tak jest brawo TY <br><br>"+'<span onclick="location.reload()">Jeszcze raz???</span>');
         }
     }
