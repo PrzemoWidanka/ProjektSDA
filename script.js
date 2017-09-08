@@ -1,9 +1,9 @@
-//variables columns and rows
+
 var colsCount = 7;
 var rowsCount = 7;
 
 $(document).ready(function () {
-    //access to html
+
     var container = $("#container");
     var gameBoard = $("#game-board");
     var headerGameBoard = $("#header-game-board");
@@ -13,7 +13,15 @@ $(document).ready(function () {
     var firstBoard = $(".first-board");
     var stopwatch = $(".stopwatch");
 
-    //variables with letters and numbers to create header and aside
+    var hitCount;
+    var numberShips = 5;
+    var intervalId;
+    var time = 0;
+    var gameBoardWithShips;
+    var missCount;
+    var bestTime = 30;
+    var timeGame = 0;
+
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
     var numbers = [1, 2, 3, 4, 5, 6, 7];
 
@@ -63,24 +71,13 @@ $(document).ready(function () {
         startGameTimer();
         restartMissCount();
         init();
-        buttonPlay.off('click');
-        buttonPlay.css('cursor', 'default');
-        gameBoard.unbind('click'); // ??? - zdejmuje nasluchiwanie klika (jesli ktos kliknie kilka razy to wykona sie to tylko raz)
+        turnOffClickButtonPlay();
+        gameBoard.unbind('click');
         gameBoard.click(clickGameBoard);
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
     }
-
-    //create ships
-    var hitCount;
-    var numberShips = 5;
-    var intervalId;
-    var time = 0;
-    var gameBoardWithShips;
-    var missCount;
-    var bestTime = 30;
-    var timeGame = 0;
 
     function restartMissCount() {
         $(".miss-ships").text("0");
@@ -98,15 +95,25 @@ $(document).ready(function () {
         }
     }
 
-    function displaySweetAlert(title, text, type){
+    function turnOffClickGameBoard() {
+        gameBoard.attr("style", "cursor: default");
+        gameBoard.unbind('click');
+    }
+
+    function turnOffClickButtonPlay() {
+        buttonPlay.attr("style", "cursor: default");
+        buttonPlay.unbind('click');
+    }
+
+    function displaySweetAlert(title, text, type) {
         setTimeout(function () {
-                    sweetAlert({
-                        title: title,
-                        text: text,
-                        type: type,
-                        closeOnCancel: false
-                    });
-                }, 10);
+            sweetAlert({
+                title: title,
+                text: text,
+                type: type,
+                closeOnCancel: false
+            });
+        }, 10);
     }
 
     function restartTime() {
@@ -159,27 +166,24 @@ $(document).ready(function () {
     }
 
     function startGameTimer() {
-        clearInterval(intervalId); // czyścimy ponieważ jeśli ktoś kliknie kilka razy by czas nie leciał szybciej
+        clearInterval(intervalId);
         intervalId = setInterval(function () {
             time++
-            updateTimer()
+            updateTimer();
             if (time === 30) {
-                displaySweetAlert("Oops","TimeOUT","error");
-                gameBoard.off('click');
-                gameBoard.attr("style", "cursor: default");
+                displaySweetAlert("Oops", "TimeOUT", "error");
+                turnOffClickGameBoard();
                 clearInterval(intervalId);
             }
         }, 1000);
     }
 
-    //function that starts the game and starts the stopwatch
     buttonPlay.click(function () {
         $(".first-board").remove();
         startGame();
         buttonRestart.removeAttr('disabled');
     });
 
-    //function that reload the website
     buttonRestart.click(function () {
         startGame();
         gameBoard.attr("style", "cursor: pointer");
@@ -211,16 +215,14 @@ $(document).ready(function () {
             missCount++;
         }
         if (missCount === 44) {
-            gameBoard.attr("style", "cursor: default");
-            gameBoard.off('click');
-            displaySweetAlert("Oops","Przegrałeś","error");
+            turnOffClickGameBoard();
+            displaySweetAlert("Oops", "Przegrałeś", "error");
             clearInterval(intervalId);
         }
         if (hitCount === 5) {
             hitCount = 0;
-            gameBoard.attr("style", "cursor: default");
-            gameBoard.off('click');
-            displaySweetAlert("Gratki","Przeszedleś GIERE","success");
+            turnOffClickGameBoard();
+            displaySweetAlert("Gratki", "Przeszedleś GIERE", "success");
             clearInterval(intervalId);
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
