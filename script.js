@@ -179,9 +179,27 @@ $(document).ready(function () {
         }, 1000);
     }
 
+    function revealField(e, classStyle, classHtmlThatDisplayNumber, numberHitShipsOrMissAttempt) {
+        var target = $(e.target);
+        target.removeClass("game-board-div");
+        target.addClass(classStyle);
+        target.click(false);
+        $(classHtmlThatDisplayNumber).text(numberHitShipsOrMissAttempt + 1);
+        numberHitShipsOrMissAttempt;
+    }
+
+    // function missShip(e) {
+    //     var target = $(e.target);
+    //     target.removeClass("game-board-div");
+    //     target.addClass("miss");
+    //     target.click(false);
+    //     $(".miss-ships").text(missCount + 1);
+    //     missCount++;
+    // }
+
     buttonPlay.click(function () {
         startGame();
-        $(".first-board").remove();
+        firstBoard.remove();
         buttonRestart.removeAttr('disabled');
     });
 
@@ -199,19 +217,21 @@ $(document).ready(function () {
         }
         var shotResult = gameBoardWithShips[coordinates[1]][coordinates[2]];
 
-        var target = $(e.target);
+        // var target = $(e.target);
         if (shotResult === 1) {
-            target.removeClass("game-board-div");
-            target.addClass("hit");
-            target.click(false);
-            $(".hit-ships").text(hitCount + 1);
-            hitCount++;
+            revealField(e, "hit", ".hit-ships", hitCount++);
+            // target.removeClass("game-board-div");
+            // target.addClass("hit");
+            // target.click(false);
+            // $(".hit-ships").text(hitCount + 1);
+            // hitCount++;
         } else {
-            target.removeClass("game-board-div");
-            target.addClass("miss");
-            target.click(false);
-            $(".miss-ships").text(missCount + 1);
-            missCount++;
+            revealField(e, "miss", ".miss-ships", missCount++);
+            // target.removeClass("game-board-div");
+            // target.addClass("miss");
+            // target.click(false);
+            // $(".miss-ships").text(missCount + 1);
+            // missCount++;
         }
         if (missCount === 44) {
             turnOffClickGameBoard();
