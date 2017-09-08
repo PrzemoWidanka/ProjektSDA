@@ -69,6 +69,7 @@ $(document).ready(function () {
         turnOffClickButtonPlay();
         gameBoard.unbind('click');
         gameBoard.click(clickGameBoard);
+        gameBoard.attr("style", "cursor: pointer");
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
@@ -160,7 +161,7 @@ $(document).ready(function () {
         }
     }
 
-    function displayTimeGame(){
+    function displayTimeGame() {
         $(".result2").text((time) + " sek.");
     }
 
@@ -179,17 +180,15 @@ $(document).ready(function () {
     }
 
     buttonPlay.click(function () {
-        $(".first-board").remove();
         startGame();
+        $(".first-board").remove();
         buttonRestart.removeAttr('disabled');
     });
 
     buttonRestart.click(function () {
         startGame();
-        gameBoard.attr("style", "cursor: pointer");
+        $(".result2").text("");
     });
-
-    buttonRestart.attr('disabled', 'disabled');
 
     function clickGameBoard(e) {
 
