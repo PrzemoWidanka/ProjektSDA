@@ -98,6 +98,17 @@ $(document).ready(function () {
         }
     }
 
+    function displaySweetAlert(title, text, type){
+        setTimeout(function () {
+                    sweetAlert({
+                        title: title,
+                        text: text,
+                        type: type,
+                        closeOnCancel: false
+                    });
+                }, 10);
+    }
+
     function restartTime() {
         time = 0;
         updateTimer(0);
@@ -153,14 +164,7 @@ $(document).ready(function () {
             time++
             updateTimer()
             if (time === 30) {
-                setTimeout(function () {
-                    sweetAlert({
-                        title: "Oops...",
-                        text: "TimeOUT!",
-                        type: "error",
-                        closeOnCancel: false
-                    });
-                }, 10);
+                displaySweetAlert("Oops","TimeOUT","error");
                 gameBoard.off('click');
                 gameBoard.attr("style", "cursor: default");
                 clearInterval(intervalId);
@@ -209,28 +213,30 @@ $(document).ready(function () {
         if (missCount === 44) {
             gameBoard.attr("style", "cursor: default");
             gameBoard.off('click');
-            setTimeout(function () {
-                sweetAlert({
-                    title: "Oops...",
-                    text: "Przegrałeś",
-                    type: "error",
-                    closeOnCancel: false
-                });
-            }, 10);
+            displaySweetAlert("Oops","Przegrałeś","error");
+            // setTimeout(function () {
+            //     sweetAlert({
+            //         title: "Oops...",
+            //         text: "Przegrałeś",
+            //         type: "error",
+            //         closeOnCancel: false
+            //     });
+            // }, 10);
             clearInterval(intervalId);
         }
         if (hitCount === 5) {
             hitCount = 0;
             gameBoard.attr("style", "cursor: default");
             gameBoard.off('click');
-            setTimeout(function () {
-                swal({
-                    title: "Gratki !!!",
-                    text: "Przeszedłeś GIERE !!",
-                    imageUrl: "sweetalert-master/example/images/thumbs-up.jpg",
-                    closeOnCancel: false
-                });
-            }, 10);
+            displaySweetAlert("Gratki","Przeszedleś GIERE","success");
+            // setTimeout(function () {
+            //     swal({
+            //         title: "Gratki !!!",
+            //         text: "Przeszedłeś GIERE !!",
+            //         imageUrl: "sweetalert-master/example/images/thumbs-up.jpg",
+            //         closeOnCancel: false
+            //     });
+            // }, 10);
             clearInterval(intervalId);
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
