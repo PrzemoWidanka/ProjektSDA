@@ -214,14 +214,6 @@ $(document).ready(function () {
             gameBoard.attr("style", "cursor: default");
             gameBoard.off('click');
             displaySweetAlert("Oops","Przegrałeś","error");
-            // setTimeout(function () {
-            //     sweetAlert({
-            //         title: "Oops...",
-            //         text: "Przegrałeś",
-            //         type: "error",
-            //         closeOnCancel: false
-            //     });
-            // }, 10);
             clearInterval(intervalId);
         }
         if (hitCount === 5) {
@@ -229,14 +221,6 @@ $(document).ready(function () {
             gameBoard.attr("style", "cursor: default");
             gameBoard.off('click');
             displaySweetAlert("Gratki","Przeszedleś GIERE","success");
-            // setTimeout(function () {
-            //     swal({
-            //         title: "Gratki !!!",
-            //         text: "Przeszedłeś GIERE !!",
-            //         imageUrl: "sweetalert-master/example/images/thumbs-up.jpg",
-            //         closeOnCancel: false
-            //     });
-            // }, 10);
             clearInterval(intervalId);
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
