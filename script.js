@@ -1,4 +1,3 @@
-
 var colsCount = 7;
 var rowsCount = 7;
 
@@ -49,10 +48,6 @@ $(document).ready(function () {
         var content = "";
         for (var i = 0; i < colsCount; i++) {
             for (var j = 0; j < rowsCount; j++) {
-                var fieldGameBoard = [
-                    [i],
-                    [j]
-                ];
 
                 var shotResult = gameBoardWithShips[i][j];
                 var style = shotResult ? ' style="opacity:0.5" ' : '';
@@ -165,6 +160,10 @@ $(document).ready(function () {
         }
     }
 
+    function displayTimeGame(){
+        $(".result2").text((time) + " sek.");
+    }
+
     function startGameTimer() {
         clearInterval(intervalId);
         intervalId = setInterval(function () {
@@ -173,6 +172,7 @@ $(document).ready(function () {
             if (time === 30) {
                 displaySweetAlert("Oops", "TimeOUT", "error");
                 turnOffClickGameBoard();
+                displayTimeGame();
                 clearInterval(intervalId);
             }
         }, 1000);
@@ -217,6 +217,7 @@ $(document).ready(function () {
         if (missCount === 44) {
             turnOffClickGameBoard();
             displaySweetAlert("Oops", "Przegrałeś", "error");
+            displayTimeGame();
             clearInterval(intervalId);
         }
         if (hitCount === 5) {
