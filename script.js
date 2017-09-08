@@ -188,15 +188,6 @@ $(document).ready(function () {
         numberHitShipsOrMissAttempt;
     }
 
-    // function missShip(e) {
-    //     var target = $(e.target);
-    //     target.removeClass("game-board-div");
-    //     target.addClass("miss");
-    //     target.click(false);
-    //     $(".miss-ships").text(missCount + 1);
-    //     missCount++;
-    // }
-
     buttonPlay.click(function () {
         startGame();
         firstBoard.remove();
@@ -217,21 +208,11 @@ $(document).ready(function () {
         }
         var shotResult = gameBoardWithShips[coordinates[1]][coordinates[2]];
 
-        // var target = $(e.target);
         if (shotResult === 1) {
             revealField(e, "hit", ".hit-ships", hitCount++);
-            // target.removeClass("game-board-div");
-            // target.addClass("hit");
-            // target.click(false);
-            // $(".hit-ships").text(hitCount + 1);
-            // hitCount++;
+
         } else {
             revealField(e, "miss", ".miss-ships", missCount++);
-            // target.removeClass("game-board-div");
-            // target.addClass("miss");
-            // target.click(false);
-            // $(".miss-ships").text(missCount + 1);
-            // missCount++;
         }
         if (missCount === 44) {
             turnOffClickGameBoard();
