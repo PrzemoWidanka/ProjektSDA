@@ -1,6 +1,26 @@
 body {
-    background: gray;
     padding: 0;
+    background-image: url(img/tlo4.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100% 100%;
+    background-color: black;
+}
+
+.pirat {
+    background-image: url(img/pirat1.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: auto auto;
+    height: 100%;
+}
+
+.background {
+    background-image: url(img/statek.jpg);
+    background-repeat: repeat;
+    background-position: top;
+    background-size: 100% 100%;
+    height: 100%;
 }
 
 #container {
@@ -9,11 +29,24 @@ body {
     position: relative;
 }
 
-h1 {
+#header-game {
+    width: 100%;
     text-align: center;
-    font-size: 50px;
-    color: white;
-    margin: 20px;
+    font-size: 70px;
+    color: black;
+    font-family: 'Sedgwick Ave Display', cursive;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    margin: 40px 0 0px 0;
+    animation: fadein 1.5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 #game-board {
@@ -25,12 +58,23 @@ h1 {
 }
 
 .game-board-div {
-    background: yellowgreen;
-    border: 1px solid yellow;
+    background: #1b51a7;
+    border: 1px solid white;
     width: 70px;
     height: 70px;
     box-sizing: border-box;
     float: left;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.6);
+    transform: rotateY(-180deg);
+}
+
+.game-board-div:hover {
+    background-color: #0066ff;
+}
+
+#pirat {
+    bottom: 0px;
+    border: 1px solid white;
 }
 
 #header-game-board {
@@ -38,12 +82,12 @@ h1 {
 }
 
 .header-game-board {
-    font-size: 25px;
+    font-size: 35px;
+    font-weight: bold;
     text-align: center;
     line-height: 70px;
-    color: white;
-    background: yellowgreen;
-    border: 1px solid yellow;
+    color: black;
+    text-shadow: -1px -1px white, 1px -1px white, -1px 1px white, 1px 1px white;
     width: 70px;
     height: 70px;
     box-sizing: border-box;
@@ -57,42 +101,46 @@ h1 {
 }
 
 .aside-game-board {
-    font-size: 25px;
+    font-size: 35px;
+    font-weight: bold;
     text-align: center;
     line-height: 70px;
-    color: white;
-    background: yellowgreen;
-    border: 1px solid yellow;
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     width: 70px;
     height: 70px;
     box-sizing: border-box;
 }
 
 .hit {
-    background: url('img/ship.png') no-repeat center center;
-    border: 1px solid yellow;
+    background: url('img/statek-hit.jpg') no-repeat center center;
+    border: 1px solid white;
     width: 70px;
     height: 70px;
     box-sizing: border-box;
     float: left;
     cursor: default;
+    transition: 0.7s;
 }
 
 .miss {
     background: url('img/bomb.png') no-repeat center center;
-    border: 1px solid yellow;
+    border: 1px solid white;
     width: 70px;
     height: 70px;
     box-sizing: border-box;
     float: left;
     cursor: default;
+    transition: 0.7s;
 }
 
 .play-button {
     font-size: 40px;
-    margin-bottom: 30px;
     cursor: pointer;
-    margin: 20px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .restart-button {
@@ -100,19 +148,7 @@ h1 {
     cursor: pointer;
     display: block;
     margin: 10px auto;
-}
-
-.first-board {
-    background: blue;
-    height: 500px;
-    position: absolute;
-    width: 560px;
-    font-size: 40px;
-    text-align: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: none;
 }
 
 .stopwatch {
@@ -121,6 +157,7 @@ h1 {
     top: 80px;
     font-size: 25px;
     color: white;
+    display: none;
 }
 
 .best-time {
@@ -129,6 +166,7 @@ h1 {
     top: 190px;
     font-size: 25px;
     color: white;
+    display: none;
 }
 
 .result {
@@ -145,6 +183,7 @@ h1 {
     bottom: 60px;
     font-size: 25px;
     color: white;
+    display: none;
 }
 
 .miss-field {
@@ -153,4 +192,9 @@ h1 {
     bottom: 20px;
     font-size: 25px;
     color: white;
+    display: none;
+}
+
+.delete-margin {
+    margin-right: 0px;
 }

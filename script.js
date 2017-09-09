@@ -21,8 +21,12 @@ $(document).ready(function () {
     var bestTime = 30;
     var timeGame = 0;
 
+    var yes = new Audio("video/Ding.mp3");
+    var no = new Audio("video/no.wav");
+
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
     var numbers = [1, 2, 3, 4, 5, 6, 7];
+
 
     function createLetters() {
 
@@ -52,13 +56,14 @@ $(document).ready(function () {
                 var shotResult = gameBoardWithShips[i][j];
                 var style = shotResult ? ' style="opacity:0.5" ' : '';
                 var id = "field_" + i + "_" + j;
-                content = content + '<div id="' + id + '" ' + style + 'class="game-board-div">' + '</div>';
+                content = content + '<div id="' + id + '" class="game-board-div">' + '</div>';
             }
         }
         return content;
     }
 
     function startGame() {
+        $("div").first().addClass("background");
         clearGameBoard();
         instertShips();
         restartTime();
@@ -67,12 +72,22 @@ $(document).ready(function () {
         restartMissCount();
         init();
         turnOffClickButtonPlay();
+        displayBlock();
         gameBoard.unbind('click');
         gameBoard.click(clickGameBoard);
         gameBoard.attr("style", "cursor: pointer");
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
+    }
+
+    function displayBlock() {
+        $(stopwatch).css('display','block');
+        $('.best-time').css('display','block');
+        $('.restart-button').css('display','block');
+        $('.hit-field').css('display','block');
+        $('.miss-field').css('display','block');
+        $('.play-button').css('display','none');
     }
 
     function restartMissCount() {
@@ -175,15 +190,16 @@ $(document).ready(function () {
                 turnOffClickGameBoard();
                 displayTimeGame();
                 clearInterval(intervalId);
+                // gameBoard.children().removeClass("game-board-div");
             }
         }, 1000);
     }
 
     function revealField(e, classStyle, classHtmlThatDisplayNumber, numberHitShipsOrMissAttempt) {
         var target = $(e.target);
-        target.removeClass("game-board-div");
         target.addClass(classStyle);
         target.click(false);
+        target.removeClass("game-board-div");
         $(classHtmlThatDisplayNumber).text(numberHitShipsOrMissAttempt + 1);
         numberHitShipsOrMissAttempt;
     }
@@ -210,9 +226,11 @@ $(document).ready(function () {
 
         if (shotResult === 1) {
             revealField(e, "hit", ".hit-ships", hitCount++);
+            yes.play();
 
         } else {
             revealField(e, "miss", ".miss-ships", missCount++);
+            no.play();
         }
         if (missCount === 44) {
             turnOffClickGameBoard();

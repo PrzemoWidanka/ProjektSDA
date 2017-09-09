@@ -7,45 +7,42 @@
     <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
     <link rel="stylesheet" href="style.css" type="text/css">
     <title>:(</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="sweetalert-master/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" -->
+        <!-- crossorigin="anonymous"></script> -->
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div id="container">
-                <h1>Gra w statki!</h1>
-                <div class="first-board">
-                    Witam Cię w moim magicznym miejscu. Jeśli masz ochotę na super fajną zabawę, Kliknij przycisk Start który znajduję się na
-                    dole strony.
+    <div class="all-page pirat">
+        <div class="container">
+            <div class="row">
+                <h1 id="header-game">Poszukiwacze Statków</h1>
+                <div id="container">
+                        <button type="button" class="btn btn-info play-button">Start - odpala maszyne</button>
+                    <div id="header-game-board"></div>
+                    <div id="aside-game-board"></div>
+                    <div id="game-board"></div>
                 </div>
-                <div id="header-game-board"></div>
-                <div id="aside-game-board"></div>
-                <div id="game-board"></div>
-            </div>
-            <div class="stopwatch">Pozostały czas gry: <span class="time">30</span>
-                <button type="button" class="btn btn-info restart-button" disabled>Restart</button>
-            </div>
-            <div class="best-time">Najlepszy wynik:
-                <div class="result">
+                <div class="stopwatch">Pozostały czas gry: <span class="time">30</span>
+                    <button type="button" class="btn btn-info restart-button" disabled>Restart</button>
                 </div>
-                Czas gry:
-                <div class="result2">
+                <div class="best-time">Najlepszy wynik:
+                    <div class="result">
+                    </div>
+                    Czas gry:
+                    <div class="result2">
+                    </div>
                 </div>
+                <div class="hit-field">Trafiłeś: <span class="hit-ships">0</span> / 5 </div>
+                <div class="miss-field">Spudłowałeś: <span class="miss-ships">0</span> / 44 </div>
             </div>
-            <div class="hit-field">Trafiłeś: <span class="hit-ships">0</span> / 5 </div>
-            <div class="miss-field">Spudłowałeś: <span class="miss-ships">0</span> / 44 </div>
         </div>
-    </div>
-    <div class="row">
-        <button type="button" class="btn btn-info play-button">Start - odpala maszyne</button>
     </div>
     <script src="script.js"></script>
 </body>
