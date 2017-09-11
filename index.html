@@ -15,33 +15,41 @@
     <script src="sweetalert-master/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" -->
-        <!-- crossorigin="anonymous"></script> -->
+    <!-- crossorigin="anonymous"></script> -->
 </head>
 
 <body>
-    <div class="all-page pirat">
-        <div class="container">
-            <div class="row">
+    <div class="container-fluid all-page">
+        <div class="row">
+            <div class="col-lg-12">
                 <h1 id="header-game">Poszukiwacze Statków</h1>
-                <div id="container">
-                        <button type="button" class="btn btn-info play-button">Start - odpala maszyne</button>
-                    <div id="header-game-board"></div>
-                    <div id="aside-game-board"></div>
-                    <div id="game-board"></div>
-                </div>
-                <div class="stopwatch">Pozostały czas gry: <span class="time">30</span>
-                    <button type="button" class="btn btn-info restart-button" disabled>Restart</button>
-                </div>
-                <div class="best-time">Najlepszy wynik:
-                    <div class="result">
-                    </div>
-                    Czas gry:
-                    <div class="result2">
-                    </div>
-                </div>
-                <div class="hit-field">Trafiłeś: <span class="hit-ships">0</span> / 5 </div>
-                <div class="miss-field">Spudłowałeś: <span class="miss-ships">0</span> / 44 </div>
             </div>
+            <!-- <div class="instruction">
+               INSTRUKCJA: Musisz znaleźć jak najszybciej potrafisz 5 statków jeśli chcesz pokonać pirata.
+            </div> -->
+            <div>
+                <button type="button" class="btn btn-danger play-button">START: Graj Teraz!</button>
+            </div>
+            <div class="pirat">
+            </div>
+            <div id="container">
+
+                <div id="header-game-board"></div>
+                <div id="aside-game-board"></div>
+                <div id="game-board"></div>
+            </div>
+            <div class="stopwatch">Pozostały czas gry: <span class="time">30</span>
+                <button type="button" class="btn btn-info restart-button" disabled>Restart</button>
+            </div>
+            <div class="best-time">Najlepszy wynik:
+                <div class="result">
+                </div>
+                Czas gry:
+                <div class="result2">
+                </div>
+            </div>
+            <div class="hit-field">Trafiłeś: <span class="hit-ships">0</span> / 5 </div>
+            <div class="miss-field">Spudłowałeś: <span class="miss-ships">0</span> / 44 </div>
         </div>
     </div>
     <script src="script.js"></script>

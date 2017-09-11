@@ -56,7 +56,7 @@ $(document).ready(function () {
                 var shotResult = gameBoardWithShips[i][j];
                 var style = shotResult ? ' style="opacity:0.5" ' : '';
                 var id = "field_" + i + "_" + j;
-                content = content + '<div id="' + id + '" class="game-board-div">' + '</div>';
+                content = content + '<div id="' + id + '" class="game-board-div hover-effect">' + '</div>';
             }
         }
         return content;
@@ -82,12 +82,14 @@ $(document).ready(function () {
     }
 
     function displayBlock() {
+        $(container).css('display','block');
         $(stopwatch).css('display','block');
         $('.best-time').css('display','block');
         $('.restart-button').css('display','block');
         $('.hit-field').css('display','block');
         $('.miss-field').css('display','block');
         $('.play-button').css('display','none');
+        $('.pirat').css('display','none');
     }
 
     function restartMissCount() {
@@ -190,7 +192,7 @@ $(document).ready(function () {
                 turnOffClickGameBoard();
                 displayTimeGame();
                 clearInterval(intervalId);
-                // gameBoard.children().removeClass("game-board-div");
+                gameBoard.children().removeClass("hover-effect");
             }
         }, 1000);
     }
