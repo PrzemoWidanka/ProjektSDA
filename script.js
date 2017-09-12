@@ -63,7 +63,6 @@ $(document).ready(function () {
     }
 
     function startGame() {
-        $("div").first().addClass("background");
         clearGameBoard();
         instertShips();
         restartTime();
@@ -247,7 +246,9 @@ $(document).ready(function () {
             clearInterval(intervalId);
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
-                localStorage.setItem("bestTimeStorage", bestTime);
+                if(localStorage){
+                    localStorage.setItem("bestTimeStorage", bestTime);
+                }
                 $(".result").text((bestTime) + " sek.");
                 $(".result2").text((bestTime) + " sek.");
             } else {
@@ -258,7 +259,7 @@ $(document).ready(function () {
     }
 
     function init() {
-        if (localStorage.getItem("bestTimeStorage", bestTime)) {
+        if (localStorage && localStorage.getItem("bestTimeStorage", bestTime)) {
             bestTime = $(".result").html(localStorage.getItem("bestTimeStorage") + " sek.");
         }
     }
