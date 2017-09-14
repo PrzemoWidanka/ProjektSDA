@@ -188,7 +188,7 @@ body {
 .game-board-div {
     background: #8b4513 no-repeat center center;
     background-size: 100% 100%;
-    border: 1px solid white;
+     border: 1px solid white; 
     width: 6vw;
     height: 10vh;
     box-sizing: border-box;
@@ -354,7 +354,7 @@ body {
 .hit {
     background: url('img/statek-hit.jpg') no-repeat center center;
     background-size: 100% 100%;
-    border: 1px solid white;
+     border: 1px solid white; 
     width: 6vw;
     height: 10vh;
     box-sizing: border-box;
@@ -387,7 +387,7 @@ body {
 .miss {
     background: url('img/bomb.png') no-repeat center center;
     background-size: 100% 100%;
-    border: 1px solid white;
+     border: 1px solid white; 
     width: 6vw;
     height: 10vh;
     box-sizing: border-box;
@@ -453,7 +453,7 @@ body {
     border: 2px solid #deb887;
     border-radius: 5px;
     padding: 1vw;
-    background: #8b4513;
+    background: #92072b;
     margin: 0 auto;
     display: none;
 }
@@ -500,7 +500,7 @@ body {
     border: 2px solid #deb887;
     border-radius: 5px;
     padding: 1vw;
-    background: #8b4513;
+    background: #92072b;
     margin: 0 auto;
 }
 
@@ -552,7 +552,7 @@ body {
     border: 2px solid #deb887;
     border-radius: 5px;
     padding: 1vw;
-    background: #8b4513;
+    background: #92072b;
     margin: 0 auto;
     display: none;
 }
@@ -594,7 +594,7 @@ body {
     border: 2px solid #deb887;
     border-radius: 5px;
     padding: 1vw;
-    background: #8b4513;
+    background: #92072b;
     margin: 0 auto;
 }
 

@@ -21,8 +21,10 @@ $(document).ready(function () {
     var bestTime = 30;
     var timeGame = 0;
 
-    var yes = new Audio("video/Ding.mp3");
+    var yes = new Audio("video/Ding.wav");
     var no = new Audio("video/no.wav");
+    var win = new Audio("video/Victory.wav");
+    var lose = new Audio("video/fail.wav");
 
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
     var numbers = [1, 2, 3, 4, 5, 6, 7];
@@ -56,7 +58,7 @@ $(document).ready(function () {
                 var shotResult = gameBoardWithShips[i][j];
                 var style = shotResult ? ' style="opacity:0.5" ' : '';
                 var id = "field_" + i + "_" + j;
-                content = content + '<div id="' + id + '" class="game-board-div hover-effect">' + '</div>';
+                content = content + '<div id="' + id + '" '+style+'class="game-board-div hover-effect">' + '</div>';
             }
         }
         return content;
@@ -65,9 +67,10 @@ $(document).ready(function () {
     function startGame() {
         clearGameBoard();
         instertShips();
+        startGameTimer();
         restartTime();
         restartHit();
-        startGameTimer();
+        // startGameTimer();
         restartMissCount();
         init();
         turnOffClickButtonPlay();
@@ -184,9 +187,10 @@ $(document).ready(function () {
     function startGameTimer() {
         clearInterval(intervalId);
         intervalId = setInterval(function () {
-            time++
+            time++;
             updateTimer();
             if (time === 30) {
+                lose.play();
                 displaySweetAlert("Oops", "TimeOUT", "error");
                 turnOffClickGameBoard();
                 displayTimeGame();
@@ -207,8 +211,6 @@ $(document).ready(function () {
 
     buttonPlay.click(function () {
         startGame();
-        firstBoard.remove();
-        buttonRestart.removeAttr('disabled');
     });
 
     buttonRestart.click(function () {
@@ -238,12 +240,14 @@ $(document).ready(function () {
             displaySweetAlert("Oops", "Przegrałeś", "error");
             displayTimeGame();
             clearInterval(intervalId);
+            lose.play();
         }
         if (hitCount === 5) {
             hitCount = 0;
             turnOffClickGameBoard();
             displaySweetAlert("Gratki", "Przeszedleś GIERE", "success");
             clearInterval(intervalId);
+            win.play();
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
                 if(localStorage){
