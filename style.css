@@ -88,21 +88,21 @@ h1 {
     cursor: default;
 }
 
-.play-button{
+.play-button {
     font-size: 40px;
     margin-bottom: 30px;
     cursor: pointer;
     margin: 20px auto;
 }
 
-.restart-button{
+.restart-button {
     font-size: 25px;
     cursor: pointer;
     display: block;
     margin: 10px auto;
 }
 
-.first-board{
+.first-board {
     background: blue;
     height: 500px;
     position: absolute;
@@ -115,25 +115,31 @@ h1 {
     flex-direction: column;
 }
 
-.stopwatch{
+.stopwatch {
     position: absolute;
     right: 100px;
     top: 80px;
     font-size: 25px;
     color: white;
 }
-.best-time{
+
+.best-time {
     position: absolute;
     right: 130px;
     top: 190px;
     font-size: 25px;
     color: white;
 }
-.result{
+
+.result {
     text-align: center;
 }
 
-.hit-field{
+.result2 {
+    text-align: center;
+}
+
+.hit-field {
     position: absolute;
     right: 100px;
     bottom: 60px;
@@ -141,7 +147,7 @@ h1 {
     color: white;
 }
 
-.miss-field{
+.miss-field {
     position: absolute;
     right: 100px;
     bottom: 20px;
