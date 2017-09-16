@@ -21,8 +21,14 @@ $(document).ready(function () {
     var bestTime = 30;
     var timeGame = 0;
 
+    var yes = new Audio("video/Ding.wav");
+    var no = new Audio("video/no.wav");
+    var win = new Audio("video/Victory.wav");
+    var lose = new Audio("video/fail.wav");
+
     var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
     var numbers = [1, 2, 3, 4, 5, 6, 7];
+
 
     function createLetters() {
 
@@ -52,7 +58,7 @@ $(document).ready(function () {
                 var shotResult = gameBoardWithShips[i][j];
                 var style = shotResult ? ' style="opacity:0.5" ' : '';
                 var id = "field_" + i + "_" + j;
-                content = content + '<div id="' + id + '" ' + style + 'class="game-board-div">' + '</div>';
+                content = content + '<div id="' + id + '" '+style+'class="game-board-div hover-effect">' + '</div>';
             }
         }
         return content;
@@ -61,18 +67,31 @@ $(document).ready(function () {
     function startGame() {
         clearGameBoard();
         instertShips();
+        startGameTimer();
         restartTime();
         restartHit();
-        startGameTimer();
+        // startGameTimer();
         restartMissCount();
         init();
         turnOffClickButtonPlay();
+        displayBlock();
         gameBoard.unbind('click');
         gameBoard.click(clickGameBoard);
         gameBoard.attr("style", "cursor: pointer");
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
+    }
+
+    function displayBlock() {
+        $(container).css('display','block');
+        $(stopwatch).css('display','block');
+        $('.best-time').css('display','block');
+        $('.restart-button').css('display','block');
+        $('.hit-field').css('display','block');
+        $('.miss-field').css('display','block');
+        $('.play-button').css('display','none');
+        $('.pirat').css('display','none');
     }
 
     function restartMissCount() {
@@ -168,30 +187,30 @@ $(document).ready(function () {
     function startGameTimer() {
         clearInterval(intervalId);
         intervalId = setInterval(function () {
-            time++
+            time++;
             updateTimer();
             if (time === 30) {
+                lose.play();
                 displaySweetAlert("Oops", "TimeOUT", "error");
                 turnOffClickGameBoard();
                 displayTimeGame();
                 clearInterval(intervalId);
+                gameBoard.children().removeClass("hover-effect");
             }
         }, 1000);
     }
 
     function revealField(e, classStyle, classHtmlThatDisplayNumber, numberHitShipsOrMissAttempt) {
         var target = $(e.target);
-        target.removeClass("game-board-div");
         target.addClass(classStyle);
         target.click(false);
+        target.removeClass("game-board-div");
         $(classHtmlThatDisplayNumber).text(numberHitShipsOrMissAttempt + 1);
         numberHitShipsOrMissAttempt;
     }
 
     buttonPlay.click(function () {
         startGame();
-        firstBoard.remove();
-        buttonRestart.removeAttr('disabled');
     });
 
     buttonRestart.click(function () {
@@ -210,24 +229,30 @@ $(document).ready(function () {
 
         if (shotResult === 1) {
             revealField(e, "hit", ".hit-ships", hitCount++);
+            yes.play();
 
         } else {
             revealField(e, "miss", ".miss-ships", missCount++);
+            no.play();
         }
         if (missCount === 44) {
             turnOffClickGameBoard();
             displaySweetAlert("Oops", "Przegrałeś", "error");
             displayTimeGame();
             clearInterval(intervalId);
+            lose.play();
         }
         if (hitCount === 5) {
             hitCount = 0;
             turnOffClickGameBoard();
             displaySweetAlert("Gratki", "Przeszedleś GIERE", "success");
             clearInterval(intervalId);
+            win.play();
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
-                localStorage.setItem("bestTimeStorage", bestTime);
+                if(localStorage){
+                    localStorage.setItem("bestTimeStorage", bestTime);
+                }
                 $(".result").text((bestTime) + " sek.");
                 $(".result2").text((bestTime) + " sek.");
             } else {
@@ -238,7 +263,7 @@ $(document).ready(function () {
     }
 
     function init() {
-        if (localStorage.getItem("bestTimeStorage", bestTime)) {
+        if (localStorage && localStorage.getItem("bestTimeStorage", bestTime)) {
             bestTime = $(".result").html(localStorage.getItem("bestTimeStorage") + " sek.");
         }
     }
