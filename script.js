@@ -58,7 +58,7 @@ $(document).ready(function () {
                 var shotResult = gameBoardWithShips[i][j];
                 var style = shotResult ? ' style="opacity:0.5" ' : '';
                 var id = "field_" + i + "_" + j;
-                content = content + '<div id="' + id + '" '+style+'class="game-board-div hover-effect">' + '</div>';
+                content = content + '<div id="' + id + '" class="game-board-div hover-effect">' + '</div>';
             }
         }
         return content;
@@ -78,6 +78,7 @@ $(document).ready(function () {
         gameBoard.unbind('click');
         gameBoard.click(clickGameBoard);
         gameBoard.attr("style", "cursor: pointer");
+        $('.remove').removeClass('main-container');
         headerGameBoard.html(createLetters());
         asideGameBoard.html(createNumbers());
         gameBoard.html(createGameBoard());
@@ -92,6 +93,9 @@ $(document).ready(function () {
         $('.miss-field').css('display','block');
         $('.play-button').css('display','none');
         $('.pirat').css('display','none');
+        $('.instruction').css('display','none');
+        $('.moje').css('display','block');
+        
     }
 
     function restartMissCount() {
@@ -193,6 +197,10 @@ $(document).ready(function () {
                 lose.play();
                 displaySweetAlert("Oops", "TimeOUT", "error");
                 turnOffClickGameBoard();
+                buttonRestart.attr('disabled', true);
+                setTimeout(function(){
+                    buttonRestart.attr('disabled', false);
+                },3500);
                 displayTimeGame();
                 clearInterval(intervalId);
                 gameBoard.children().removeClass("hover-effect");
@@ -248,6 +256,10 @@ $(document).ready(function () {
             displaySweetAlert("Gratki", "Przeszedleś GIERE", "success");
             clearInterval(intervalId);
             win.play();
+            buttonRestart.attr('disabled', true);
+            setTimeout(function(){
+                buttonRestart.attr('disabled', false);
+            },5000);
             if (time < bestTime || time < localStorage.getItem("bestTimeStorage", bestTime)) {
                 bestTime = time;
                 if(localStorage){

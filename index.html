@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
     <link rel="stylesheet" href="style.css" type="text/css">
     <title>:(</title>
@@ -14,44 +13,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="sweetalert-master/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" -->
     <!-- crossorigin="anonymous"></script> -->
 </head>
 
 <body>
-    <div class="container-fluid all-page">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 id="header-game">Poszukiwacze Statków</h1>
-            </div>
-            
-            <div class="stopwatch">Pozostały czas: <span class="time">30</span>
-                <button type="button" class="btn btn-warning restart-button">Restart</button>
-            </div>
-            <div class="best-time">Najlepszy wynik:
-                <div class="result">
+    <div class="main-container remove">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 id="header-game">Poszukiwacze Statków</h1>
                 </div>
-                Czas gry:
-                <span class="result2">
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <button type="button" class="btn btn-danger play-button">START: Graj Teraz!</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-push-3 col-xs-6 col-lg-push-4 col-lg-4 instruction">
+                    <p>Odsłaniaj pola i znajdź 5 statków zanim upłynie czas!</p>
+                </div>
+                <div class="pirat">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="">
+                <div class="container-times">
+                    <div class="stopwatch">Pozostały czas: <span class="time">30</span>
+                        <button type="button" class="btn btn-warning restart-button">Restart</button>
+                    </div>
+                    <div class="best-time">Najlepszy wynik:
+                        <div class="result">
+                        </div>
+                        Czas gry:
+                        <span class="result2">
                 </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="container">
+                        <div id="header-game-board"></div>
+                        <div id="aside-game-board"></div>
+                        <div id="game-board"></div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="container-attempt">
+                        <div class="hit-field">Trafiłeś: <span class="hit-ships">0</span> / 5 </div>
+                        <div class="miss-field">Spudłowałeś: <span class="miss-ships">0</span> / 44 </div>
+                    </div>
+                </div>
             </div>
-            <div class="container-button">
-                <button type="button" class="btn btn-danger play-button">START: Graj Teraz!</button>
-            </div>
-            <div class="pirat">
-            </div>
-            <div id="container">
-
-                <div id="header-game-board"></div>
-                <div id="aside-game-board"></div>
-                <div id="game-board"></div>
-            </div>
-
-
-            <div class="hit-field">Trafiłeś: <span class="hit-ships">0</span> / 5 </div>
-            <div class="miss-field">Spudłowałeś: <span class="miss-ships">0</span> / 44 </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 
