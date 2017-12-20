@@ -1,6 +1,12 @@
-body {
+html, body {
     padding: 0;
     margin: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(240, 187, 117, 1) 0%, rgba(158, 66, 0, 1) 100%)
+}
+
+.main-container {
     min-width: 100%;
     min-height: 100%;
     background-image: url(img/tlo5.png);
@@ -11,35 +17,79 @@ body {
     background-color: black;
 }
 
+/* .moje {
+    background: radial-gradient(ellipse at center, rgba(240, 187, 117, 1) 0%, rgba(158, 66, 0, 1) 100%)
+} */
+
 #header-game {
     text-align: center;
-    font-size: 8vw;
+    font-size: 70px;
     color: black;
     font-family: 'Sedgwick Ave Display', cursive;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    margin-top: 5vh;
+    margin-top: 25px;
     animation: fadein 1.5s;
 }
 
 @media screen and (max-width: 480px) {
     #header-game {
-        margin-top: 2vh;
-        font-size: 10vw;
+        margin-top: 20px;
+        font-size: 45px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     #header-game {
-        margin-top: 5vh;
-        font-size: 9vw;
+        margin-top: 20px;
+        font-size: 62px;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 700px) {
+    #header-game {
+        margin-top: 25px;
+        font-size: 72px;
+    }
+}
+
+.instruction {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    border: 2px solid #deb887;
+    border-radius: 5px;
+    padding: 4px;
+    padding-bottom: 0px;
+    z-index: 400;
+    background: #92072b;
+    animation: fadein 1.5s;
+}
+
+@media screen and (max-width: 480px) {
+    .instruction {
+        text-align: center;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 699px) and (min-width: 481px) {
+    .instruction {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 700px) {
+    .instruction {
+        font-size: 20px;
     }
 }
 
 .pirat {
-    width: 60vw;
-    height: 75vh;
+    position: absolute;
     bottom: 0;
-    left: 0;
+    width: 50vw;
+    height: 50vh;
     background-image: url(img/pirat1.png);
     background-repeat: no-repeat;
     background-size: auto 100%;
@@ -48,79 +98,58 @@ body {
 
 @media screen and (max-width: 480px) {
     .pirat {
-        height: 45vh;
-        position: absolute;
+        height: 40vh;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .pirat {
-        height: 45vh;
-        position: absolute;
+        height: 40vh;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .pirat {
-        position: absolute;
-        height: 60vh;
-        /* width: 50vh; */
-        /* left: 20%;   */
-        /* background-position: bottom left;   */
-        /* background-size: 20vw;  */
+        height: 40vh;
     }
 }
 
-.container-button {
-    width: 100%;
-    margin: 0 auto;
-}
-
 .play-button {
-    font-size: 4vw;
+    font-size: 55px;
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
     font-family: 'Sedgwick Ave Display', cursive;
-    padding: 1vw;
-    padding-bottom: 0.5vw;
-    border-radius: 2vw;
+    padding: 5px;
+    padding-bottom: 1px;
+    border-radius: 10px;
     animation: fadein 1.5s;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 480px) {
     .play-button {
-        position: relative;
-        padding: 1vw;
-        padding-bottom: 0.5vw;
-        font-size: 7vw;
-        top: 15vh;
+        margin: 0px;
+        padding: 4px;
+        padding-bottom: 1px;
+        font-size: 28px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .play-button {
-        position: relative;
-        font-size: 7vw;
-        padding: 1vw;
-        padding-bottom: 0.5vw;
-        top: 15vh;
+        font-size: 42px;
+        padding: 5px;
+        padding-bottom: 2px;
+        margin-bottom: 10px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .play-button {
         position: relative;
-        font-size: 5vw;
-        padding: 1vw;
-        padding-bottom: 0.5vw;
-        margin: 0 auto;
-        top: 20vh;
-        /* top: center; */
-        transform: translate();
+        font-size: 45px;
+        padding: 5px;
+        padding-bottom: 1px;
+        margin-bottom: 15px;
     }
 }
 
@@ -134,63 +163,67 @@ body {
 }
 
 #container {
-    width: 53vw;
+    width: 670px;
     margin: 0 auto;
     display: none;
+    clear: both;
 }
 
 @media screen and (max-width: 480px) {
     #container {
-        width: 89vw;
+        width: 400px;
+        clear: both;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     #container {
-        width: 89vw;
+        width: 550px;
+        clear: both;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     #container {
-        width: 88vw;
+        width: 600px;
+        clear: both;
     }
 }
 
 #game-board {
-    width: 45vw;
-    height: 45vh;
+    width: 540px;
+    height: 460px;
     float: left;
     /* margin-bottom: 10px; */
 }
 
 @media screen and (max-width: 480px) {
     #game-board {
-        width: 77vw;
-        height: 77vh;
+        width: 330px;
+        height: 330px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     #game-board {
-        width: 77vw;
-        height: 77vh;
+        width: 460px;
+        height: 360px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     #game-board {
-        width: 70vw;
-        height: 70vh;
+        width: 470px;
+        height: 400px;
     }
 }
 
 .game-board-div {
     background: #8b4513 no-repeat center center;
     background-size: 100% 100%;
-     border: 1px solid white; 
-    width: 6vw;
-    height: 10vh;
+    border: 1px solid white;
+    width: 75px;
+    height: 65px;
     box-sizing: border-box;
     float: left;
     box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.6);
@@ -199,22 +232,22 @@ body {
 
 @media screen and (max-width: 480px) {
     .game-board-div {
-        width: 11vw;
-        height: 11vh;
+        width: 45px;
+        height: 50px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .game-board-div {
-        width: 11vw;
-        height: 11vh;
+        width: 65px;
+        height: 45px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .game-board-div {
-        width: 10vw;
-        height: 10vh;
+        width: 65px;
+        height: 55px;
     }
 }
 
@@ -223,72 +256,69 @@ body {
 }
 
 #header-game-board {
-    width: 55vw;
+    width: 700px;
 }
 
 @media screen and (max-width: 480px) {
     #header-game-board {
-        width: 88vw;
+        width: 380px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     #header-game-board {
-        width: 88vw;
+        width: 550px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     #header-game-board {
-        width: 80vw;
+        width: 650px;
     }
 }
 
 .header-game-board {
-    font-size: 4vw;
+    font-size: 45px;
     font-weight: bold;
     text-align: center;
-    line-height: 10vh;
+    line-height: 65px;
     color: black;
     text-shadow: -1px -1px white, 1px -1px white, -1px 1px white, 1px 1px white;
-    width: 6vw;
-    height: 10vh;
+    width: 75px;
+    height: 65px;
     box-sizing: border-box;
     float: left;
 }
 
 @media screen and (max-width: 480px) {
     .header-game-board {
-        font-size: 7vw;
-        margin-bottom: 1vw;
-        line-height: 11vh;
-        width: 11vw;
-        height: 10vh;
+        font-size: 25px;
+        line-height: 50px;
+        width: 45px;
+        height: 50px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .header-game-board {
-        font-size: 7vw;
-        margin-bottom: 1vw;
-        line-height: 11vh;
-        width: 11vw;
-        height: 10vh;
+        font-size: 30px;
+        line-height: 45px;
+        width: 65px;
+        height: 45px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .header-game-board {
-        font-size: 6vw;
-        /* margin-bottom: 1vw;  */
-        line-height: 10vh;
-        width: 10vw;
-        height: 9vh;
+        font-size: 40px;
+        line-height: 55px;
+        width: 65px;
+        height: 55px;
     }
 }
 
 #aside-game-board {
-    width: 6vw;
+    width: 75px;
     float: left;
     clear: both;
     margin-bottom: 10px;
@@ -296,67 +326,67 @@ body {
 
 @media screen and (max-width: 480px) {
     #aside-game-board {
-        width: 11vw;
+        width: 45px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     #aside-game-board {
-        width: 11vw;
+        width: 65px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     #aside-game-board {
-        width: 10vw;
+        width: 65px;
     }
 }
 
 .aside-game-board {
-    font-size: 4vw;
+    font-size: 45px;
     font-weight: bold;
     text-align: center;
-    line-height: 10vh;
+    line-height: 65px;
     color: black;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    width: 6vw;
-    height: 10vh;
+    width: 75px;
+    height: 65px;
     box-sizing: border-box;
 }
 
 @media screen and (max-width: 480px) {
     .aside-game-board {
-        font-size: 7vw;
-        line-height: 11vh;
-        width: 11vw;
-        height: 11vh;
+        font-size: 25px;
+        line-height: 50px;
+        width: 45px;
+        height: 50px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .aside-game-board {
-        font-size: 7vw;
-        line-height: 11vh;
-        width: 11vw;
-        height: 11vh;
+        font-size: 30px;
+        line-height: 45px;
+        width: 65px;
+        height: 45px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .aside-game-board {
-        font-size: 6vw;
-        line-height: 10vh;
-        width: 10vw;
-        height: 10vh;
+        font-size: 40px;
+        line-height: 55px;
+        width: 65px;
+        height: 55px;
     }
 }
 
 .hit {
     background: url('img/statek-hit.jpg') no-repeat center center;
     background-size: 100% 100%;
-     border: 1px solid white; 
-    width: 6vw;
-    height: 10vh;
+    border: 1px solid white;
+    width: 75px;
+    height: 65px;
     box-sizing: border-box;
     float: left;
     cursor: default;
@@ -365,31 +395,31 @@ body {
 
 @media screen and (max-width: 480px) {
     .hit {
-        width: 11vw;
-        height: 11vh;
+        width: 45px;
+        height: 50px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .hit {
-        width: 11vw;
-        height: 11vh;
+        width: 65px;
+        height: 45px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .hit {
-        width: 10vw;
-        height: 10vh;
+        width: 65px;
+        height: 55px;
     }
 }
 
 .miss {
     background: url('img/bomb.png') no-repeat center center;
     background-size: 100% 100%;
-     border: 1px solid white; 
-    width: 6vw;
-    height: 10vh;
+    border: 1px solid white;
+    width: 75px;
+    height: 65px;
     box-sizing: border-box;
     float: left;
     cursor: default;
@@ -398,27 +428,27 @@ body {
 
 @media screen and (max-width: 480px) {
     .miss {
-        width: 11vw;
-        height: 11vh;
+        width: 45px;
+        height: 50px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .miss {
-        width: 11vw;
-        height: 11vh;
+        width: 65px;
+        height: 45px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .miss {
-        width: 10vw;
-        height: 10vh;
+        width: 65px;
+        height: 55px;
     }
 }
 
 .restart-button {
-    font-size: 2vw;
+    font-size: 20px;
     cursor: pointer;
     display: block;
     margin: 10px auto;
@@ -428,110 +458,114 @@ body {
 
 @media screen and (max-width: 480px) {
     .restart-button {
-        font-size: 5vw;
+        margin: 5px auto;
+        font-size: 15px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .restart-button {
-        font-size: 4vw;
+        margin: 5px auto;
+        font-size: 17px;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .restart-button {
-        font-size: 2vw;
+        margin: 5px auto;
+        font-size: 19px;
     }
 }
 
+.container-times {
+    min-width: 300px;
+}
+
 .stopwatch {
-    position: absolute;
-    right: 5vw;
-    top: 20vh;
-    font-size: 2vw;
+    font-size: 22px;
+    width: 220px;
+    height: 110px;
     color: white;
+    text-align: center;
     border: 2px solid #deb887;
     border-radius: 5px;
-    padding: 1vw;
+    padding: 5px;
     background: #92072b;
-    margin: 0 auto;
     display: none;
+    float: left;
 }
 
 @media screen and (max-width: 480px) {
     .stopwatch {
-        position: relative;
-        font-size: 5vw;
-        top: 0;
-        left: 0;
+        width: 140px;
+        height: 75px;
+        font-size: 15px;
+        margin-left: 5px;
         float: left;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .stopwatch {
-        position: relative;
-        font-size: 4vw;
-        top: 0;
-        left: 0;
+        width: 160px;
+        height: 85px;
+        font-size: 17px;
+        margin-left: 5px;
         float: left;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .stopwatch {
-        position: relative;
-        font-size: 2vw;
-        top: 0;
-        left: 0;
+        width: 190px;
+        height: 100px;
+        font-size: 20px;
+        margin-left: 10px;
         float: left;
-        padding: 2vw;
     }
 }
 
 .best-time {
-    position: absolute;
-    left: 2vw;
-    top: 20vh;
-    font-size: 2vw;
-    ;
+    width: 220px;
+    height: 110px;
+    font-size: 22px;
     color: white;
+    text-align: center;
     display: none;
     border: 2px solid #deb887;
     border-radius: 5px;
-    padding: 1vw;
+    padding: 5px;
     background: #92072b;
-    margin: 0 auto;
+    float: right;
 }
 
 @media screen and (max-width: 480px) {
     .best-time {
-        font-size: 5vw;
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-left: 7vw;
+        width: 130px;
+        height: 75px;
+        font-size: 15px;
+        float: right;
+        margin-right: 5px;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .best-time {
-        font-size: 4vw;
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-left: 7vw;
+        width: 150px;
+        height: 80px;
+        font-size: 17px;
+        margin-right: 5px;
+        float: right;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .best-time {
-        font-size: 2vw;
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-left: 7vw;
-        padding: 2vw;
+        width: 180px;
+        height: 95px;
+        font-size: 20px;
+        margin-right: 20px;
+        float: right;
     }
 }
 
@@ -543,15 +577,20 @@ body {
     text-align: center;
 }
 
+.container-attempt {
+    min-width: 310px;
+}
+
 .hit-field {
-    position: absolute;
-    right: 5vw;
-    bottom: 0vh;
-    font-size: 2vw;
+    width: 220px;
+    height: 40px;
+    font-size: 22px;
+    float: left;
     color: white;
+    text-align: center;
     border: 2px solid #deb887;
     border-radius: 5px;
-    padding: 1vw;
+    padding: 3px;
     background: #92072b;
     margin: 0 auto;
     display: none;
@@ -559,69 +598,76 @@ body {
 
 @media screen and (max-width: 480px) {
     .hit-field {
-        font-size: 5vw;
-        position: relative;
-        right: 0;
-        bottom: 0;
+        width: 120px;
+        height: 30px;
+        font-size: 15px;
+        margin-left: 5px;
+        float: left;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .hit-field {
-        font-size: 4vw;
-        position: relative;
-        right: 0;
-        bottom: 0;
+        width: 160px;
+        height: 32px;
+        font-size: 16px;
+        margin-left: 5px;
+        float: left;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .hit-field {
-        font-size: 2vw;
-        position: relative;
-        right: 0;
-        bottom: 0;
+        width: 250px;
+        height: 40px;
+        font-size: 20px;
+        margin-left: 10px;
+        float: left;
     }
 }
 
 .miss-field {
-    position: absolute;
-    left: 2vw;
-    bottom: 0vh;
-    font-size: 2vw;
+    width: 220px;
+    height: 40px;
+    font-size: 22px;
+    float: right;
     color: white;
+    text-align: center;
     display: none;
     border: 2px solid #deb887;
     border-radius: 5px;
-    padding: 1vw;
+    padding: 3px;
     background: #92072b;
     margin: 0 auto;
 }
 
 @media screen and (max-width: 480px) {
     .miss-field {
-        font-size: 5vw;
-        position: relative;
-        right: 0;
-        bottom: 0;
+        width: 160px;
+        height: 30px;
+        font-size: 15px;
+        margin-right: 5px;
+        float: right;
     }
 }
 
 @media screen and (max-width: 699px) and (min-width: 481px) {
     .miss-field {
-        font-size: 4vw;
-        position: relative;
-        right: 0;
-        bottom: 0;
+        width: 180px;
+        height: 32px;
+        font-size: 16px;
+        margin-right: 5px;
+        float: right;
     }
 }
 
 @media screen and (max-width: 992px) and (min-width: 700px) {
     .miss-field {
-        font-size: 2vw;
-        position: relative;
-        right: 0;
-        bottom: 0;
+        width: 250px;
+        height: 40px;
+        font-size: 20px;
+        margin-right: 10px;
+        float: right;
     }
 }
 
